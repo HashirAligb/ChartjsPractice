@@ -17,7 +17,27 @@
                     phone : phone 
                 }; 
 
-                onAddFirm(newFirm);  
+                fetch('http://localhost:5001/api/firms', {
+                    method: 'POST', 
+                    headers : { 
+                        'Content-Type': 'application/json',
+
+                    }, 
+                    body : JSON.stringify(newFirm)
+
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    onAddFirm(newFirm);  // Update React state after successful save
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+
+
+
                 setName(''); 
                 setBorough(''); 
                 setContact('');
